@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "bootstrap": "^5.3.3",
     "eslint-config-wesbos": "^4.3.2",
     "next": "14.0.2",
     "react": "^18",
