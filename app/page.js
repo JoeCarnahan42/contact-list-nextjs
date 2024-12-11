@@ -1,8 +1,11 @@
-
+import 'bootstrap/dist/css/bootstrap.css'
+import Contacts from './contacts/page'
 
 
 export default function Home() {
   return (
-    <h1>All Contacts</h1>
+    <main className='text-center'>
+      <Contacts />
+    </main>
   )
 }
