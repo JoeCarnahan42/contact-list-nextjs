@@ -3,19 +3,18 @@ import Link from "next/link";
 import ContactList from "../ContactList/page";
 import { useState } from 'react'
 import Data from "../Data/page";
+import '/app/style.css'
 
 
 export default function Contacts() {
   const [search, setSearch] = useState(Data.all())
   const searchCon = (e) => {
-    console.log(e.target.value)
-    // TODO : normalize input
+    const normData = e.target.value.toLowerCase()
     if (e.target.value === '') {
-      setSearch(Data.all())
+      setSearch(Data.contacts)
     } else {
-      console.log(search)
-      const newList = Data.all().filter((c) => {
-        return c.name.includes(e.target.value)
+      const newList = Data.contacts.filter((c) => {
+        return c.name.toLowerCase().includes(normData)// Normalizes Input and Response
       })
       setSearch(newList)
     }
