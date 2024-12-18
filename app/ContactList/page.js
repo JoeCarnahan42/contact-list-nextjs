@@ -2,22 +2,60 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import Image from "next/image"
 import Link from 'next/link'
-import '/app/style.css'
 
 export default function ContactList({ prop }) {
+  const link = () => {
+    alert('Sorry, but this does not function!')
+  }
 
   return (
-    <div className='container list-bg'>
+    <div className='container'>
+      <div className='row text-center'>
+        <div className="col">
+          <div className="border-0 list-group-item"><u>Profile Picture</u></div>
+        </div>
+        <div className="col">
+          <div className="border-0 list-group-item"><u>Name</u></div>
+        </div>
+        <div className="col">
+          <div className="border-0 list-group-item"><u>Email</u></div>
+        </div>
+        <div className="col">
+          <div className="border-0 list-group-item"><u>Phone Number</u></div>
+        </div>
+        <div className="col">
+          <div className="border-0 list-group-item"><u>Actions</u></div>
+        </div>
+      </div>
+
+      <br />
+
       {prop.map((c) => (
-        <ul className='list-group list-group-horizontal justify-content-center ' key={c.id}>
-          <li className="border-0 list-group-item list-bg">
-            <Image width={40} height={40} alt="unc" src={c.image_url} />
-          </li>
-          <li className='border-0 list-group-item list-bg'><Link href={'/contact'}>{c.name}</Link></li>
-          <li className='border-0 list-group-item list-bg'>{c.email}</li>
-          <li className='border-0 list-group-item list-bg'>{c.phone_number}</li>
-          <li className='border-0 list-group-item list-bg'><a className='link'>Edit</a></li>
-        </ul>
+        <div className="row text-center p-1" key={c.id}>
+          <div className="col">
+            <div className="border-0 list-group-item">
+              <Image width={40} height={40} alt="unc" src={c.image_url} />
+            </div>
+          </div>
+          <div className="col">
+            <div className="border-0 list-group-item">
+              <Link id={c.id} href={{ pathname: '/contacts/contact', query: { id: c.id } }}>
+                {c.name}
+              </Link>
+            </div>
+          </div>
+          <div className="col">
+            <div className="border-0 list-group-item">{c.email}</div>
+          </div>
+          <div className="col">
+            <div className="border-0 list-group-item">{c.phone_number}</div>
+          </div>
+          <div className="col">
+            <div className="border-0 list-group-item">
+              <button onClick={link} className='btn btn-link'>Edit/Delete</button>
+            </div>
+          </div>
+        </div>
       ))}
     </div>
   )

@@ -3,7 +3,6 @@ import Link from "next/link";
 import ContactList from "../ContactList/page";
 import { useState } from 'react'
 import Data from "../Data/page";
-import '/app/style.css'
 
 
 export default function Contacts() {
@@ -27,7 +26,7 @@ export default function Contacts() {
       </div>
       <br />
       <div >
-        <input id="con-search" onChange={searchCon} className="input-group-text m-auto" placeholder="Search Contacts" type="text"></input>
+        <input id="con-search" onChange={searchCon} className="input-group-text m-auto" placeholder="Search Contacts By Name" type="text"></input>
         <br />
         <ContactList prop={search} />
       </div>
