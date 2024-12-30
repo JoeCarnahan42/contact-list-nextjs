@@ -6,10 +6,10 @@ import Data from "../Data/page";
 
 
 export default function Contacts() {
-  const [search, setSearch] = useState(Data.all())
+  const [search, setSearch] = useState(Data.contacts)
   const searchCon = (e) => {
     const normData = e.target.value.toLowerCase()
-    if (e.target.value === '') {
+    if (e.target.value.trim() === '') {
       setSearch(Data.contacts)
     } else {
       const newList = Data.contacts.filter((c) => {

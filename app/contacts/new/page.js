@@ -14,12 +14,10 @@ export default function NewContact() {
   const router = useRouter();
   
   const [isDisabled, setIsDisabled] = useState(true)
-  
-  
+  const [errorMessage, setErrorMessage] = useState('')
   
   const addCon = (e) => {
     e.preventDefault()
-    console.log('Adding...')
     const id = Math.round(Math.random() * 100)
     
     Data.addContact(id, nameInput.current.value, imgInput.current.value, emailInput.current.value, phoneInput.current.value);
@@ -33,50 +31,42 @@ export default function NewContact() {
     
     router.push('/contacts')
   }
-  
+  const renderInputs = (label, type, ref) => {
+    return (
+      <div className="form-group">
+        <label><u>{label}</u></label>
+        <br />
+        <input onChange={enableSubmit} required ref={ref} className="input-group-text m-auto" type={type}></input>
+        <br />
+      </div>
+    )
+  }
   const enableSubmit = () => {
-
-    const isValidUrl = (string) => {
-      try {
-        new URL(string);
-        return true;
-      } catch (e) {
-        return false
-      }
-    }
-
-    const urlValid = isValidUrl(imgInput.current.value)
+    const urlValid = imgInput.current.checkValidity();
 
     if (nameInput.current.value === '' || urlValid === false || emailInput.current.value === '' || phoneInput.current.value === '' || imgInput.current.value === '') {
       setIsDisabled(true)
+      if (imgInput.current.value.trim() !== '' && urlValid === false) {
+        setErrorMessage('Please use a valid image url')
+      } else {
+        setErrorMessage('')
+      }
     } else {
       setIsDisabled(false)
     }
   }
-
   return (
     <>
       <h1 className="text-center p-3">Add New Contact</h1>
       <form className="text-center p-3 mx-auto border rounded w-25 p-3">
-        <label><u>Name</u></label>
-        <br />
-        <input onChange={enableSubmit} required ref={nameInput} className="input-group-text m-auto" type="text" />
-        <br />
-        <label><u>Image URL</u></label>
-        <br />
-        <input onChange={enableSubmit} required ref={imgInput} className="input-group-text m-auto" type="url" />
-        <br />
-        <label><u>Email</u></label>
-        <br />
-        <input onChange={enableSubmit} required ref={emailInput} className="input-group-text m-auto" type="email" />
-        <br />
-        <label><u>Phone Number</u></label>
-        <br />
-        <input onChange={enableSubmit} required ref={phoneInput} className="input-group-text m-auto" type="text" />
-        <br />
+        {renderInputs('Name', 'text', nameInput)}
+        {renderInputs('Image URL', 'url', imgInput)}
+        {renderInputs('Email', 'email', emailInput)}
+        {renderInputs('Phone Number', 'text', phoneInput)}
         <button className="btn btn-primary" disabled={isDisabled} onClick={addCon}>Add Contact</button>
         <br />
         <Link href='/contacts'>Cancel</Link>
+        <h3 style={{ color: "red" }}>{errorMessage}</h3>
       </form>
     </>
   )

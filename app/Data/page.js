@@ -36,13 +36,10 @@ const Data = {
       "phone_number": "+1-555-567-8901"
     }
   ],
-  all: function () {
-    return this.contacts
-  },
   addContact: function (id, name, image_url, email, phone_number) {
     this.contacts.push({id, name, image_url, email, phone_number })
   },
-  get: function () {
+  get: function (id) {
     const isContact = (c) => c.id === id
     return this.contacts.find(isContact) 
   }
